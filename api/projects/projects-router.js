@@ -1,40 +1,58 @@
 // Write your "projects" router here!
-const route = require('express').Router();
+const express = require('express')
+
+const { validateProjectId, validateProject} = require('./projects-middleware')
 
 const Projects = require('./projects-model');
 
+const router = express.Router()
+
 router.get('/', (req, res) => {
-    Projects.get()
-    .then()
-    .catch()
+    Projects.get(req.query)
+    .then(projects => {
+        res.status(200).send(projects || [])
+    })
+    .catch(err => res.status(500).send(err))
 })
 
-router.get('/:id', (req, res) => {
-    res.json()
+router.get('/:id', validateProjectId, (req, res) => {
+    Projects.get(req.params.id)
+    .then(project => {
+        res.status(200).send(project)
+    })
+    .catch(err => res.status(500).send(err))
 })
 
-router.post('/', (req, res) => {
-    Projects.insert()
-    .then()
-    .catch()
+router.post('/', validateProjectId, validateProject, (req, res) => {
+    Projects.insert(req.body)
+    .then(project => {
+        res.status(201).send(project)
+    })
+    .catch(err => res.status(500).send(err))
 })
 
-router.put('/:id', (req, res) => {
-    Projects.update()
-    .then()
-    .catch()
+router.put('/:id', validateProjectId, validateProject, (req, res) => {
+    Projects.update(req.params.id, req.body)
+    .then(project => {
+        res.status(200).send(project)
+    })
+    .catch(err => res.status(500).send(err))
 })
 
-router.delete('/:id', (res, req) => {
-    Projects.remove()
-    .then()
-    .catch()
+router.delete('/:id', validateProjectId, (res, req) => {
+    Projects.remove(req.params.id)
+    .then(() => {
+        res.status(200).end();
+    })
+    .catch(err => res.status(500).send(err))
 })
 
-router.get('/:id/actions', (req, res) => {
-    Projects.getProjectActions()
-    .then()
-    .catch()
+router.get('/:id/actions', validateProjectId, (req, res) => {
+    Projects.getProjectActions(req.params.id)
+    .then(actions => {
+        rea.status(200).send(actions  || [])
+    })
+    .catch(err => res.status(500).send(err))
 })
 
 module.exports = router
