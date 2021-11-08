@@ -147,7 +147,26 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+Node.js allows developers to write javascript for the back end environment; it is open-source and cross-platform. This lets the same language be used when programming the front end and back end. Express is a framework/library that streamlines operations, such as HTTP requests, and lets developers use middleware to further compress and compartmentalize code.
+
+
 1. Understand and explain the use of Middleware.
+
+Express middleware are functions that execute during the lifecycle of a request to the server. Express is made up entirely of middleware. It can be used for error handling or streamlining http responses in a manner tht is similar to custom hooks in React. Middleware use 'request' or 'response' for each route it is attached to. Using the 'next' gives middleware the ability to either terminate an HTTP request or pass it to another middleware function using  'next.'
+
 1. The basic principles of the REST architectural style.
+
+The basic principles of Representative State Transfer (REST) architectural style are:
+- Idempotency - Fault-tolerant, uniform interface so as to mitigate the possibilty that duplicate requests to the API cause it to become unstable
+-Statelessness - each request should stand on its own; order does not matter.
+-Cacheable- Stores/retrieves data so the server can fulfill requests faster (idempotency) without repeating calculations/operations.
+-Client-Server Pattern- emphasizes a separation of concerns, which help the client and server sides to evolve indepedently; improving the scalability of components.
+-Layered system - enforces stability by having a hierarchical structure that restricts the affects these layered components have on one another.
+-Code on demand - Enables further client functionality by making code accessible and executable to the client.
+
 1. Understand and explain the use of Express Routers.
+Express routers make it easier to to handle routes/requests to URLs and allow the use of middleware to further streamline these operations.
+
 1. Describe tooling used to manually test the correctness of an API.
+
+Manual Tools like HTTPie or Thunderclient allow a user to make requests to a specific URL. It allows a developer to test as they create each route to ensure requests are working as intended.

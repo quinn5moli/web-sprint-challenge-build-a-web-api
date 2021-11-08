@@ -8,7 +8,7 @@ const Projects = require('./projects-model');
 const router = express.Router()
 
 router.get('/', (req, res) => {
-    Projects.get(req.query)
+    Projects.get()
     .then(projects => {
         res.status(200).send(projects || [])
     })
